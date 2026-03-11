@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://cyghd66t61jmq"]
+
+[ext_resource type="Texture2D" uid="uid://7pjifqq6u4w6" path="res://Astronaut.png" id="1_3fane"]
+[ext_resource type="Script" uid="uid://blob2qe7vj6gt" path="res://astronaut.gd" id="1_3g61j"]
+[ext_resource type="Texture2D" uid="uid://y0yfcufqsqy5" path="res://Sternenhimmel.png" id="1_qyogv"]
+[ext_resource type="Script" uid="uid://bkgg743yfhykn" path="res://asteroiden_timer.gd" id="3_3eu2w"]
+[ext_resource type="Texture2D" uid="uid://bqk4fb02wut75" path="res://Asteroid1.png" id="4_qyogv"]
+[ext_resource type="Texture2D" uid="uid://bvipmv3y5c2kf" path="res://Asteroid2.png" id="5_pxsep"]
+[ext_resource type="Texture2D" uid="uid://1vfvl4pfacww" path="res://Asteroid3.png" id="6_p4dme"]
+[ext_resource type="Texture2D" uid="uid://k5g8uyyppfky" path="res://Asteroid4.png" id="7_cr41n"]
+[ext_resource type="Texture2D" uid="uid://d2o70i80sjn82" path="res://batterie.png" id="9_8wvrx"]
+[ext_resource type="Script" uid="uid://bqqa7a1t8v053" path="res://Ereignisse.gd" id="9_pxsep"]
+[ext_resource type="FontFile" uid="uid://plbwf5ahmiuc" path="res://nulshock bd.ttf" id="10_0057m"]
+[ext_resource type="Script" uid="uid://bvwlneag2bnl5" path="res://punktzahl.gd" id="11_8wvrx"]
+[ext_resource type="Script" uid="uid://5q0dcqtsitxv" path="res://game_over.gd" id="11_gbtb6"]
+[ext_resource type="Script" uid="uid://cn77exbov60gj" path="res://start_info.gd" id="12_8wvrx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pxsep"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4dme"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cr41n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0057m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6nxb"]
+size = Vector2(49, 21)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a6nxb"]
+font = ExtResource("10_0057m")
+font_size = 80
+outline_color = Color(1, 0.22352941, 1, 1)
+shadow_color = Color(0.4862745, 0.4862745, 0.4862745, 0.6627451)
+
+[node name="Spielszene" type="Node2D" unique_id=880274356]
+
+[node name="Sternenhimmel" type="Sprite2D" parent="." unique_id=584856935]
+position = Vector2(795, 473.00003)
+scale = Vector2(0.8333333, 0.8981481)
+texture = ExtResource("1_qyogv")
+
+[node name="Energie" type="Node2D" parent="." unique_id=1266452939]
+
+[node name="Asteroidenfeld" type="Node2D" parent="." unique_id=2064927294]
+
+[node name="Astronaut" type="Area2D" parent="." unique_id=1758104647]
+position = Vector2(130, 387)
+script = ExtResource("1_3g61j")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Astronaut" unique_id=1983448337]
+polygon = PackedVector2Array(16, 18, 23, 18, 29, 15, 26, 7, 27, 2, 39, -9, 44, -22, 45, -36, 34, -47, 18, -49, 2, -41, -4, -32, -14, -30, -37, -12, -43, -3, -35, 7, -28, 16, -34, 21, -42, 30, -43, 41, -39, 47, -22, 40, -8, 37, 1, 26, 11, 22, 16, 19)
+
+[node name="Sprite2D" type="Sprite2D" parent="Astronaut" unique_id=1615410623]
+position = Vector2(0, -2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_3fane")
+
+[node name="AsteoridenTimer" type="Timer" parent="." unique_id=578286830 node_paths=PackedStringArray("Asteroidenfeld", "Energie")]
+wait_time = 0.945
+autostart = true
+script = ExtResource("3_3eu2w")
+Asteroidenfeld = NodePath("../Asteroidenfeld")
+Energie = NodePath("../Energie")
+
+[node name="Astro1" type="RigidBody2D" parent="AsteoridenTimer" unique_id=2084278073]
+visible = false
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="Asteroid1" type="Sprite2D" parent="AsteoridenTimer/Astro1" unique_id=714881792]
+position = Vector2(-44, -11)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_qyogv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AsteoridenTimer/Astro1" unique_id=2144132213]
+position = Vector2(-46, -12)
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_pxsep")
+
+[node name="Astro2" type="RigidBody2D" parent="AsteoridenTimer" unique_id=2058917183]
+visible = false
+collision_mask = 0
+
+[node name="Asteroid2" type="Sprite2D" parent="AsteoridenTimer/Astro2" unique_id=211611895]
+position = Vector2(-113, -7)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_pxsep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AsteoridenTimer/Astro2" unique_id=465577884]
+position = Vector2(-107, -2)
+scale = Vector2(6, 6)
+shape = SubResource("CircleShape2D_p4dme")
+
+[node name="Astro3" type="RigidBody2D" parent="AsteoridenTimer" unique_id=1080457598]
+visible = false
+collision_mask = 0
+
+[node name="Asteroid3" type="Sprite2D" parent="AsteoridenTimer/Astro3" unique_id=110677164]
+position = Vector2(-118.99999, 47.999996)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_p4dme")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AsteoridenTimer/Astro3" unique_id=154547735]
+position = Vector2(-120, 37)
+shape = SubResource("CircleShape2D_cr41n")
+
+[node name="Astro4" type="RigidBody2D" parent="AsteoridenTimer" unique_id=624850023]
+visible = false
+collision_mask = 0
+
+[node name="Asteroid4" type="Sprite2D" parent="AsteoridenTimer/Astro4" unique_id=463796425]
+position = Vector2(-133.00002, 9)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_cr41n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AsteoridenTimer/Astro4" unique_id=1721435863]
+position = Vector2(-143, 12)
+scale = Vector2(5, 2)
+shape = SubResource("CapsuleShape2D_0057m")
+
+[node name="Energie1" type="RigidBody2D" parent="AsteoridenTimer" unique_id=1181235892]
+visible = false
+collision_mask = 0
+
+[node name="Energie1" type="Sprite2D" parent="AsteoridenTimer/Energie1" unique_id=1727952707]
+position = Vector2(-148, 90)
+texture = ExtResource("9_8wvrx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AsteoridenTimer/Energie1" unique_id=547678263]
+position = Vector2(-145.5, 88.5)
+shape = SubResource("RectangleShape2D_a6nxb")
+
+[node name="Ereignisse" type="Node" parent="." unique_id=938697461]
+script = ExtResource("9_pxsep")
+
+[node name="Punktzahl" type="Label" parent="." unique_id=215030452]
+offset_left = 1134.0
+offset_top = 20.0
+offset_right = 1563.0
+offset_bottom = 117.0
+text = "000000"
+label_settings = SubResource("LabelSettings_a6nxb")
+script = ExtResource("11_8wvrx")
+
+[node name="GameOver" type="Label" parent="." unique_id=1920326995]
+visible = false
+offset_left = 509.0
+offset_top = 393.0
+offset_right = 1105.0
+offset_bottom = 490.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_a6nxb")
+script = ExtResource("11_gbtb6")
+
+[node name="StartInfo" type="Label" parent="." unique_id=1522500733]
+visible = false
+offset_left = 172.0
+offset_top = 770.0
+offset_right = 1377.0
+offset_bottom = 867.0
+text = "press space to start"
+label_settings = SubResource("LabelSettings_a6nxb")
+script = ExtResource("12_8wvrx")
+
+[connection signal="body_entered" from="Astronaut" to="Astronaut" method="_on_body_entered"]
+[connection signal="timeout" from="AsteoridenTimer" to="AsteoridenTimer" method="_on_timeout"]
